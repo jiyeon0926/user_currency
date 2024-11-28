@@ -4,6 +4,7 @@ import com.sparta.currency_user.entity.Currency;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
 
 import java.math.BigDecimal;
 
@@ -14,9 +15,11 @@ public class CurrencyRequestDto {
     private BigDecimal exchangeRate;
 
     @NotBlank(message = "통화 이름은 필수 입력 항목입니다.")
+    @Length(max = 10)
     private String currencyName;
 
     @NotBlank(message = "표시는 필수 입력 항목입니다.")
+    @Length(max = 5)
     private String symbol;
 
     public Currency toEntity() {

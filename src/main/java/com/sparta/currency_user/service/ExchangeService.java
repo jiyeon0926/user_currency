@@ -39,11 +39,11 @@ public class ExchangeService {
     }
 
     public List<ExchangeResponseDto> findAllByUserId(Long userId) {
-        return exchangeRepository.findAllByUserIdOrderByModifiedAt(userId).stream().map(ExchangeResponseDto::toDto).toList();
+        return exchangeRepository.findAllByUserIdOrderByModifiedAtDesc(userId).stream().map(ExchangeResponseDto::toDto).toList();
     }
 
-    public ExchangeResponseDto updateStatus(Long currencyId, String status) {
-        Exchange exchange = exchangeRepository.findExchangeByCurrencyIdOrElseThrow(currencyId);
+    public ExchangeResponseDto updateStatus(Long userId, Long currencyId, String status) {
+        Exchange exchange = exchangeRepository.findExchangeByCurrencyIdOrElseThrow(userId, currencyId);
         exchange.setStatus(status);
         exchangeRepository.save(exchange);
 

@@ -6,8 +6,10 @@ import com.sparta.currency_user.controller.dto.ExchangeUpdateRequestDto;
 import com.sparta.currency_user.service.ExchangeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -33,6 +35,12 @@ public class ExchangeController {
     // 특정 환전 요청 상태를 취소로 변경
     @PatchMapping("/{userId}")
     public ResponseEntity<ExchangeResponseDto> updateStatus(@PathVariable Long userId, @RequestBody ExchangeUpdateRequestDto exchangeUpdateRequestDto) {
-        return ResponseEntity.ok().body(exchangeService.updateStatus(exchangeUpdateRequestDto.getCurrencyId(), exchangeUpdateRequestDto.getStatus()));
+        String status = exchangeUpdateRequestDto.getStatus();
+
+        if (!status.equals("canceled")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "currencyId만 요청하거나 'canceled'라고 정확하게 입력해야 합니다.");
+        }
+
+        return ResponseEntity.ok().body(exchangeService.updateStatus(userId, exchangeUpdateRequestDto.getCurrencyId(), status));
     }
 }
