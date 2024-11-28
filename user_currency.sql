@@ -10,7 +10,7 @@ CREATE TABLE user (
 -- 통화 테이블
 CREATE TABLE currency (
     id BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '통화 고유 식별자',
-    exchange_rate DECIMAL(10, 2) NOT NULL COMMENT '환율', 
+    exchange_rate DECIMAL(10, 4) NOT NULL COMMENT '환율', 
     currency_name VARCHAR(10) NOT NULL COMMENT '통화 이름', 
     symbol VARCHAR(5) NOT NULL COMMENT '표시',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '생성일자',
