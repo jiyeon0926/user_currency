@@ -24,3 +24,8 @@
 |특정 고객이 수행한 환전 요청 조회|GET|/currencies/{userId}|GET /currencies/1 HTTP/1.1||{</br>"user_id": 1,</br>"currency_id": 1,</br>"amount_in_krw": 10000,</br>"amount_after_exchange": 6.99,</br>"status": "normal",</br>"created_at": 2024-11-18 16:42:03.000000,</br>"modified_at": 2024-11-18 16:42:03.000000</br>}|200 OK</br>404 Not Found||
 |특정 환전 요청 상태를 취소로 변경|PATCH|/currencies/{userId}|PATCH /currencies/1 HTTP/1.1</br>Content-Type: application/json|{</br>"currency_id": 1, "status": "canceled"</br>}|{</br>"user_id": 1,</br>"currency_id": 1,</br>"amount_in_krw": 10000,</br>"amount_after_exchange": 6.99,</br>"status": "canceled",</br>"created_at": 2024-11-18 16:42:03.000000,</br>"modified_at": 2024-11-19 16:42:03.000000</br>}|200 OK</br>400 Bad Request</br>404 Not Found|- 성공하면 200 반환</br>- 필드 누락이면 400 반환</br>- 요청한 내역이 없으면 404 반환|
 |고객이 삭제될 때 해당 고객이 수행한 모든 환전 요청도 삭제|DELETE|/users/{userId}|DELETE /users/1 HTTP/1.1|||200 OK|cascade 적용|
+
+----------------------
+
+# ☁ ERD
+<img src="https://github.com/user-attachments/assets/0aac5622-22a3-4330-97d1-24f47285f99c">
