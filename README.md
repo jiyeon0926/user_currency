@@ -28,4 +28,4 @@
 ----------------------
 
 # ☁ ERD
-<img src="https://github.com/user-attachments/assets/333e0d63-11e0-446f-8ab1-91a8a889ca34">
+<img src="https://github.com/user-attachments/assets/f1b388fa-38a7-4057-b7cc-0e69506a70f8">
