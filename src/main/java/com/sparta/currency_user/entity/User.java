@@ -2,21 +2,25 @@ package com.sparta.currency_user.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-public class User {
+@Table(name = "user")
+@NoArgsConstructor
+public class User extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(nullable = false, unique = true)
     private String email;
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
+    @Column(nullable = false)
+    private String name;
 
-    public User() {}
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
 }
