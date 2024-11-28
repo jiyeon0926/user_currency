@@ -2,6 +2,7 @@ package com.sparta.currency_user.controller;
 
 import com.sparta.currency_user.controller.dto.ExchangeResponseDto;
 import com.sparta.currency_user.controller.dto.ExchangeSaveRequestDto;
+import com.sparta.currency_user.controller.dto.ExchangeGroupedResponseDto;
 import com.sparta.currency_user.controller.dto.ExchangeUpdateRequestDto;
 import com.sparta.currency_user.service.ExchangeService;
 import jakarta.validation.Valid;
@@ -42,5 +43,11 @@ public class ExchangeController {
         }
 
         return ResponseEntity.ok().body(exchangeService.updateStatus(userId, exchangeUpdateRequestDto.getCurrencyId(), status));
+    }
+
+    // 특정 고객의 모든 환전 요청을 그룹화하여 조회
+    @GetMapping("/{userId}/grouped")
+    public ResponseEntity<List<ExchangeGroupedResponseDto>> findAllGroupedByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok().body(exchangeService.findAllGroupedByUserId(userId));
     }
 }

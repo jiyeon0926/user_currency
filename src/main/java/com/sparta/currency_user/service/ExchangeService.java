@@ -1,6 +1,7 @@
 package com.sparta.currency_user.service;
 
 import com.sparta.currency_user.controller.dto.CurrencyResponseDto;
+import com.sparta.currency_user.controller.dto.ExchangeGroupedResponseDto;
 import com.sparta.currency_user.controller.dto.ExchangeResponseDto;
 import com.sparta.currency_user.controller.dto.UserResponseDto;
 import com.sparta.currency_user.entity.Exchange;
@@ -48,5 +49,9 @@ public class ExchangeService {
         exchangeRepository.save(exchange);
 
         return new ExchangeResponseDto(exchange);
+    }
+
+    public List<ExchangeGroupedResponseDto> findAllGroupedByUserId(Long userId) {
+        return exchangeRepository.findAllGroupedByUserId(userId);
     }
 }
