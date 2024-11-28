@@ -1,5 +1,6 @@
 package com.sparta.currency_user.entity;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,5 +35,9 @@ public class Currency extends Base{
         this.exchangeRate = exchangeRate;
         this.currencyName = currencyName;
         this.symbol = symbol;
+    }
+
+    @PostConstruct
+    public void initExchangeRate() {
     }
 }
