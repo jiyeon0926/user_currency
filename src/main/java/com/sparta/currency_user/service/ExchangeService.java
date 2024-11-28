@@ -30,8 +30,15 @@ public class ExchangeService {
         Long userDtoId = userDto.getId();
         Long currencyDtoId = currencyDto.getId();
         BigDecimal exchangeRate = currencyDto.getExchangeRate();
+        String symbol = currencyDto.getSymbol();
 
-        BigDecimal amountAfterExchange = amountInKrw.divide(exchangeRate, 2, RoundingMode.HALF_UP);
+        BigDecimal amountAfterExchange;
+
+        if (symbol.equals("$")) {
+            amountAfterExchange = amountInKrw.divide(exchangeRate, 2, RoundingMode.HALF_UP);
+        } else {
+            amountAfterExchange = amountInKrw.divide(exchangeRate, 2, RoundingMode.HALF_UP).multiply(new BigDecimal("100"));
+        }
 
         Exchange exchange = new Exchange(userDtoId, currencyDtoId, amountInKrw, amountAfterExchange);
         Exchange saved = exchangeRepository.save(exchange);
