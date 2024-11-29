@@ -17,21 +17,25 @@ public class UserController {
 
     private final UserService userService;
 
+    // 유저 전체 조회
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> findUsers() {
         return ResponseEntity.ok().body(userService.findAll());
     }
 
+    // 유저 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findUser(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.findById(id));
     }
 
+    // 유저 등록
     @PostMapping
     public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         return ResponseEntity.ok().body(userService.save(userRequestDto));
     }
 
+    // 유저 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);

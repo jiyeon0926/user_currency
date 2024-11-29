@@ -17,18 +17,22 @@ import java.util.List;
 @RequestMapping("/currencies")
 @RequiredArgsConstructor
 public class CurrencyController {
+
     private final CurrencyService currencyService;
 
+    // 통화 전체 조회
     @GetMapping
     public ResponseEntity<List<CurrencyResponseDto>> findCurrencies() {
         return ResponseEntity.ok().body(currencyService.findAll());
     }
 
+    // 통화 단건 조회
     @GetMapping("/{id}")
     public ResponseEntity<CurrencyResponseDto> findCurrency(@PathVariable Long id) {
         return ResponseEntity.ok().body(currencyService.findById(id));
     }
 
+    // 통화 등록
     @PostMapping
     public ResponseEntity<CurrencyResponseDto> createCurrency(@Valid @RequestBody CurrencyRequestDto currencyRequestDto) {
         BigDecimal exchangeRate = currencyRequestDto.getExchangeRate();

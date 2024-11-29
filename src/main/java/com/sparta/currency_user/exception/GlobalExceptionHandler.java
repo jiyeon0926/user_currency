@@ -10,6 +10,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // 예를 들어 유저 등록 시, 이메일(유니크)이 중복일 경우 예외 처리
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<String> handleSQLIntegrityConstraintViolation(SQLIntegrityConstraintViolationException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
